@@ -6,27 +6,6 @@ import skfuzzy as fuzz
 from sklearn.metrics import confusion_matrix,roc_auc_score,roc_curve
 import matplotlib.pyplot as plt
 import sklearn
-cf_matrix = np.array([[5, 0, 0, 0],
-                             [0, 7, 0, 1],
-                             [0, 0, 3, 2],
-                             [0, 0, 0, 6]])
-
-num_classes = len(cf_matrix)
-TP = [0] * num_classes
-FP = [0] * num_classes
-FN = [0] * num_classes
-TN = [0] * num_classes
-
-# Loop over the classes
-for i in range(num_classes):
-  # Get the TP, FP, FN, and TN values for class i
-  TP[i] = cf_matrix[i][i]
-  FP[i] = sum([cf_matrix[j][i] for j in range(num_classes) if j != i])
-  FN[i] = sum([cf_matrix[i][j] for j in range(num_classes) if j != i])
-  TN[i] = sum([cf_matrix[j][k] for j in range(num_classes) for k in range(num_classes) if j != i and k != i])
-print('recall : '+ str(sum(TP)/(sum(TP)+sum(FN))))
-print('precision : '+ str(sum(TP)/(sum(TP)+sum(FP))))
-print('f1 score : '+ str(sum(TP)/(sum(TP)+(0.5*(sum(FN)+sum(FP))))))
 ## reading sepsis and no_sepsis datasets
 ## I choose 1,5,7,8,14,21,30,31,39,42 th csv in sepsis folder, And 2,21,22,24,31,39,42,43,44,45 th csv in no-sepsis folder
 path = r'sepsis'
